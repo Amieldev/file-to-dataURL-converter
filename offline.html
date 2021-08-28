@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="iconfonts/material-icons.css"/>
+    <link rel="stylesheet" href="style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1">
+    <title>File-To-DataURL</title>
+    <style>
+        .retry{
+            width:100px;
+            height:50px;
+            background:#00ff95;
+            box-shadow:3px 3px 10px rgba(0,0,0,0.3);
+            position: absolute;
+            top:50%;
+            left:50%;
+            margin:-50px;
+            border:none;
+            border-radius:5px;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <button class="title">No-Connection &nbsp;:(</button>
+
+    <button class="retry">Retry <i class="material-icons">replay</i></button>
+</body>
+<script>
+const retry=document.querySelector(".retry");
+retry.onclick=()=>{
+    if(navigator.onLine){
+        window.location="index.html";
+    }else{
+        alert("You are still offline.");
+    }
+}
+</script>
+</html>

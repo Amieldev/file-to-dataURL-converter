@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<loading-ring color="blue" background="black" size="150"></loading-ring>
+</body>
+<script>
+class LoadingRing extends HTMLElement{
+    constructor(){
+        super();
+    }
+    connectedCallback(){
+        this.innerHTML=`
+        <style>
+@keyframes spin{
+    from{
+        transform: rotateZ(0deg);
+    }to{
+        transform: rotateZ(360deg);
+    }
+}
+.ring{
+    width:${this.getAttribute("size")||"100px"}px;
+    height:${this.getAttribute("size")||"100px"}px;
+    border-radius:50%;
+    position: absolute;
+    overflow: hidden;
+}
+.hole{
+    width:${(0.8*this.getAttribute("size"))||"80px"}px;
+    height:${(0.8*this.getAttribute("size"))||"80px"}px;
+    position: absolute;
+    top:${(0.1*this.getAttribute("size"))||"10px"}px;
+    left:${(0.1*this.getAttribute("size"))||"10px"}px;
+    border-radius:50%;
+    background:${this.getAttribute("background")||this.getAttribute("hole")||"white"};
+}
+.transparent{
+    width:${(0.5*this.getAttribute("size"))||"50px"}px;
+    height:${(0.5*this.getAttribute("size"))||"50px"}px;
+    position: absolute;top:0px;left:0px;
+    background:${this.getAttribute("background")||this.getAttribute("hole")||"white"};
+}
+.spinner{
+    width:${this.getAttribute("size")||"100px"};
+    height:${this.getAttribute("size")||"100px"};
+    position: absolute;top:0px;left:0px;
+    background:${this.getAttribute("background")||"white"};
+    animation:spin linear 1s infinite;
+    background:${this.getAttribute("color")||"linear-grradient(45deg,cyan,#00ff00)"};
+}
+</style>
+
+    <div class="ring">
+        <div class="spinner"><div class="transparent"></div></div>
+        <div class="hole"></div>
+
+    </div>
+        `
+    }
+}
+customElements.define("loading-ring",LoadingRing)
+</script>
+</html>
